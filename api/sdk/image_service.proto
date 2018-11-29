@@ -1,0 +1,20 @@
+syntax = "proto3";
+package sdk;
+option go_package = "sdk";
+option objc_class_prefix = "GIC";
+
+import "sdk/image.proto";
+
+// CreateImageRequest is used as a sub-request to create an image.
+// All fields are mandatory.
+message CreateImageRequest {
+    // Image is the image itself.
+    Image image = 1;
+}
+
+// UpdateImageRequest is used as a sub-request to update an image.
+// All fields are mandatory.
+message UpdateImageRequest {
+    // Image is the new image.
+    Image image = 1;
+}

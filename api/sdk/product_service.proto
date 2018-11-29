@@ -1,0 +1,63 @@
+syntax = "proto3";
+package sdk;
+option go_package = "sdk";
+option objc_class_prefix = "GIC";
+
+import "sdk/image_service.proto";
+import "sdk/product.proto";
+
+// CreateProductRequest is used to create a product.
+// The product field is mandatory.
+message CreateProductRequest {
+    // Product contains all information needed to create a product.
+    Product product = 1;
+
+    // Image is the image that are going to be assigned to this product.
+    CreateImageRequest image = 2;
+}
+
+// CreateProductResponse confirms the creation of a product.
+message CreateProductResponse {
+    // Product is the created product.
+    ProductWithUniqueId product = 1;
+}
+
+// UpdateProductRequest is used to update a product.
+// The unique_id field is mandatory together with either the product or the image.
+message UpdateProductRequest {
+    // UniqueId is the unique ID of the product.
+    string unique_id = 1;
+
+    // Product contains information about the new values for this product.
+    Product product = 2;
+
+    // Image is the image to be updated.
+    UpdateImageRequest image = 3;
+}
+
+// UpdateProductRequest confirms the update of a product.
+message UpdateProductResponse {
+    // Product is the updated product.
+    ProductWithUniqueId product = 1;
+}
+
+// DeleteProductRequest is used to delete a product.
+// All fields are mandatory.
+message DeleteProductRequest {
+    // UniqueId is the unique ID of the product, that needs to be deleted.
+    string unique_id = 1;
+}
+
+// DeleteProductResponse confirms the deletion of a product.
+message DeleteProductResponse {
+}
+
+// GetProductsRequest is used to fetch all products in the current catalog.
+message GetProductsRequest {
+}
+
+// GetProductsResponse is used to fetch all products in the current catalog.
+message GetProductsResponse {
+    // Product is a list of all products in the current catalog.
+    repeated ProductWithUniqueId product = 1;
+}

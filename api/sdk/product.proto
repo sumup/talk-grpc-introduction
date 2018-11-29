@@ -1,0 +1,30 @@
+syntax = "proto3";
+package sdk;
+option go_package = "sdk";
+option objc_class_prefix = "GIC";
+
+import "sdk/image.proto";
+
+// Product contains information about a catalog's product.
+message Product {
+    // Name is the name of the product.
+    string name = 1;
+
+    // Description of the product.
+    string description = 2;
+
+    // Price is the price of the product.
+    double price = 3;
+}
+
+// ProductWithUniqueId represents a product with assigned unique ID, images and attributes.
+message ProductWithUniqueId {
+    // UniqueId is the unique ID of the product.
+    string unique_id = 1;
+
+    // Product is the underlying product.
+    Product product = 2;
+
+    // Image is an image assigned to this product.
+    Image image = 3;
+}
