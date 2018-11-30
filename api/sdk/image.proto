@@ -1,0 +1,10 @@
+syntax = "proto3";
+package sdk;
+option go_package = "sdk";
+option objc_class_prefix = "GIC";
+
+// Image is the wrapper for the image.
+message Image {
+    // Data is the byte data of the image.
+    bytes data = 1;
+}

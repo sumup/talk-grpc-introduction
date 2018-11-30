@@ -1,0 +1,25 @@
+syntax = "proto3";
+package sdk;
+option go_package = "sdk";
+option objc_class_prefix = "GIC";
+
+import "sdk/product_service.proto";
+
+// ProductService wraps all calls, which are relevant for a product.
+service ProductService {
+    // CreateProduct creates a product in the current catalog.
+    rpc CreateProduct (CreateProductRequest) returns (CreateProductResponse) {
+    }
+
+    // UpdateProduct updates an existing product.
+    rpc UpdateProduct (UpdateProductRequest) returns (UpdateProductResponse) {
+    }
+
+    // DeleteProduct deletes an existing product.
+    rpc DeleteProduct (DeleteProductRequest) returns (DeleteProductResponse) {
+    }
+
+    // GetProducts fetches all products in the current catalog.
+    rpc GetProducts (GetProductsRequest) returns (GetProductsResponse) {
+    }
+}
