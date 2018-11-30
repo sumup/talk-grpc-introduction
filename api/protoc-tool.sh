@@ -9,7 +9,7 @@ ROOT_DIRECTORY=$(dirname "${BASE}")
 PROTO_FILES="${BASE}/sdk/image.proto ${BASE}/sdk/image_service.proto ${BASE}/sdk/product.proto ${BASE}/sdk/product_service.proto sdk/sdk.proto"
 PROTO_INCLUDE_DIR=${BASE}
 PROTO_GO_OUT_DIR=${ROOT_DIRECTORY}/server
-PROTO_OBJC_OUT_DIR=${ROOT_DIRECTORY}/client/Catalog/Generated
+PROTO_OBJC_OUT_DIR=${ROOT_DIRECTORY}/client/Catalog/API/Generated
 PROTO_OBJC_PLUGIN=${ROOT_DIRECTORY}/client/Pods/protoc-grpc/grpc_objective_c_plugin
 PROTO_LINT_PLUGIN=$(which protoc-gen-lint)
 
