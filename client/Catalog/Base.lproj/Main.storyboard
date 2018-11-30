@@ -29,8 +29,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="89Q-zJ-Znz">
-                                                    <rect key="frame" x="5" y="0.0" width="100" height="99.5"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="89Q-zJ-Znz">
+                                                    <rect key="frame" x="5" y="5" width="100" height="89.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="0Ro-GJ-oC2"/>
                                                     </constraints>
@@ -64,8 +64,8 @@
                                                 <constraint firstItem="Vw6-fE-XgY" firstAttribute="top" secondItem="ilp-Bl-I3V" secondAttribute="top" id="CJ5-2K-fSw"/>
                                                 <constraint firstAttribute="trailing" secondItem="Vw6-fE-XgY" secondAttribute="trailing" id="DCj-cV-oHo"/>
                                                 <constraint firstItem="Vw6-fE-XgY" firstAttribute="leading" secondItem="89Q-zJ-Znz" secondAttribute="trailing" constant="5" id="E57-U6-G4w"/>
-                                                <constraint firstItem="89Q-zJ-Znz" firstAttribute="top" secondItem="ilp-Bl-I3V" secondAttribute="top" id="MmH-Bx-F4c"/>
-                                                <constraint firstAttribute="bottom" secondItem="89Q-zJ-Znz" secondAttribute="bottom" id="g0b-qV-zDB"/>
+                                                <constraint firstItem="89Q-zJ-Znz" firstAttribute="top" secondItem="ilp-Bl-I3V" secondAttribute="top" constant="5" id="MmH-Bx-F4c"/>
+                                                <constraint firstAttribute="bottom" secondItem="89Q-zJ-Znz" secondAttribute="bottom" constant="5" id="g0b-qV-zDB"/>
                                                 <constraint firstAttribute="bottom" secondItem="Vw6-fE-XgY" secondAttribute="bottom" id="oNR-dL-1O1"/>
                                             </constraints>
                                         </tableViewCellContentView>
