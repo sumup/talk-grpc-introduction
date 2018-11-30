@@ -10,13 +10,18 @@ import Foundation
 
 class RandomData {
     private static var sequence = 0
-    
+
     static func randomProduct() -> GICProduct {
         sequence += 1
-        return GICProduct(name: "Name \(sequence)", description: "Description \(sequence)", price: Double.init(sequence))
+
+        return GICProduct(
+            name: "Name \(sequence)",
+            description: "Description \(sequence)",
+            price: Double.init(sequence))
     }
 
     static func randomImage() -> UIImage {
-        return UIImage(named: "product\(Int(Double(sequence).truncatingRemainder(dividingBy: 5)))")!
+        let productIndex = Int(Double(sequence).truncatingRemainder(dividingBy: 5))
+        return UIImage(named: "product\(productIndex)")!
     }
 }

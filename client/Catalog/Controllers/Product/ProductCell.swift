@@ -13,11 +13,11 @@ class ProductCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
-    
+
     func display(_ product: GICProductWithUniqueId) {
         nameLabel.text = product.product.name
         descriptionLabel.text = product.product.description_p
-        priceLabel.text = String(format:"%f", product.product.price)
+        priceLabel.text = String(format: "%f", product.product.price)
         productImageView.image = UIImage(data: product.image.data_p)
     }
 }

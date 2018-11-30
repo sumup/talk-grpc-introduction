@@ -26,13 +26,18 @@ extension ProductViewController: UITableViewDataSource, UITableViewDelegate {
         return products.count
     }
 
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, sourceView, completionHandler) in
+    func tableView(_ tableView: UITableView,
+                   trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .destructive, title: "Delete") { (_, _, completionHandler) in
             self.deleteProduct(tableView, self.products[indexPath.item], handler: completionHandler)
         }
 
-        let edit = UIContextualAction(style: .normal, title: "Edit") { (action, sourceView, completionHandler) in
-            self.updateProduct(tableView, self.products[indexPath.item], RandomData.randomImage(), handler: completionHandler)
+        let edit = UIContextualAction(style: .normal, title: "Edit") { (_, _, completionHandler) in
+            self.updateProduct(
+                tableView,
+                self.products[indexPath.item],
+                RandomData.randomImage(),
+                handler: completionHandler)
         }
 
         let swipeActionConfig = UISwipeActionsConfiguration(actions: [edit, delete])
@@ -41,9 +46,12 @@ extension ProductViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath) as! ProductCell
-        let product = products[indexPath.item];
-        cell.display(product)
-        return cell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath) as? ProductCell {
+            let product = products[indexPath.item]
+            cell.display(product)
+            return cell
+        }
+
+        return UITableViewCell()
     }
 }

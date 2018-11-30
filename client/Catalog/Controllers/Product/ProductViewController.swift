@@ -12,7 +12,7 @@ class ProductViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addRandomProductButton: UIButton!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
-    
+
     let refreshControl = UIRefreshControl()
 
     var products: [GICProductWithUniqueId] = []
