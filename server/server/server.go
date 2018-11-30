@@ -8,36 +8,35 @@ import (
 	"grpc-introduction-server/sdk"
 )
 
-var products []*sdk.ProductWithUniqueId
-var currentProductID = 0
-
 // GrpcServer is the gRPC server implementation.
 type GrpcServer struct {
+	products         []*sdk.ProductWithUniqueId
+	currentProductID int64
 }
 
 // CreateProduct is used for creating a product in the in-memory database.
-func (GrpcServer) CreateProduct(context context.Context, request *sdk.CreateProductRequest) (*sdk.CreateProductResponse, error) {
-	product := createProductFromInput(request)
-	products = append(products, product)
+func (server *GrpcServer) CreateProduct(context context.Context, request *sdk.CreateProductRequest) (*sdk.CreateProductResponse, error) {
+	product := server.createProductFromInput(request)
+	server.products = append(server.products, product)
 
 	return &sdk.CreateProductResponse{Product: product}, nil
 }
 
 // UpdateProduct is used for updating a product in the in-memory database.
-func (GrpcServer) UpdateProduct(context context.Context, request *sdk.UpdateProductRequest) (*sdk.UpdateProductResponse, error) {
-	product := findProductByUniqueID(request.UniqueId)
+func (server *GrpcServer) UpdateProduct(context context.Context, request *sdk.UpdateProductRequest) (*sdk.UpdateProductResponse, error) {
+	product := server.findProductByUniqueID(request.UniqueId)
 	if product == nil {
 		return nil, status.New(codes.NotFound, "Product not found").Err()
 	}
 
-	updateProductFromInput(product, request)
+	server.updateProductFromInput(product, request)
 
 	return &sdk.UpdateProductResponse{Product: product}, nil
 }
 
 // DeleteProduct is used for deleting a product from the in-memory database.
-func (GrpcServer) DeleteProduct(context context.Context, request *sdk.DeleteProductRequest) (*sdk.DeleteProductResponse, error) {
-	if deleteProductByUniqueID(request.UniqueId) {
+func (server *GrpcServer) DeleteProduct(context context.Context, request *sdk.DeleteProductRequest) (*sdk.DeleteProductResponse, error) {
+	if server.deleteProductByUniqueID(request.UniqueId) {
 		return &sdk.DeleteProductResponse{}, nil
 	}
 
@@ -45,15 +44,15 @@ func (GrpcServer) DeleteProduct(context context.Context, request *sdk.DeleteProd
 }
 
 // GetProducts is used for retrieving all products from the in-memory database.
-func (GrpcServer) GetProducts(context.Context, *sdk.GetProductsRequest) (*sdk.GetProductsResponse, error) {
-	return &sdk.GetProductsResponse{Product: products}, nil
+func (server *GrpcServer) GetProducts(context.Context, *sdk.GetProductsRequest) (*sdk.GetProductsResponse, error) {
+	return &sdk.GetProductsResponse{Product: server.products}, nil
 }
 
-func createProductFromInput(input *sdk.CreateProductRequest) *sdk.ProductWithUniqueId {
-	currentProductID = currentProductID + 1
+func (server *GrpcServer) createProductFromInput(input *sdk.CreateProductRequest) *sdk.ProductWithUniqueId {
+	server.currentProductID = server.currentProductID + 1
 
 	product := &sdk.ProductWithUniqueId{
-		UniqueId: fmt.Sprintf("%d", currentProductID),
+		UniqueId: fmt.Sprintf("%d", server.currentProductID),
 		Product:  input.Product,
 	}
 
@@ -64,8 +63,8 @@ func createProductFromInput(input *sdk.CreateProductRequest) *sdk.ProductWithUni
 	return product
 }
 
-func findProductByUniqueID(uniqueID string) *sdk.ProductWithUniqueId {
-	for _, product := range products {
+func (server *GrpcServer) findProductByUniqueID(uniqueID string) *sdk.ProductWithUniqueId {
+	for _, product := range server.products {
 		if product.UniqueId != uniqueID {
 			continue
 		}
@@ -76,7 +75,7 @@ func findProductByUniqueID(uniqueID string) *sdk.ProductWithUniqueId {
 	return nil
 }
 
-func updateProductFromInput(product *sdk.ProductWithUniqueId, input *sdk.UpdateProductRequest) {
+func (server *GrpcServer) updateProductFromInput(product *sdk.ProductWithUniqueId, input *sdk.UpdateProductRequest) {
 	if input.Product != nil {
 		product.Product = input.Product
 	}
@@ -86,13 +85,13 @@ func updateProductFromInput(product *sdk.ProductWithUniqueId, input *sdk.UpdateP
 	}
 }
 
-func deleteProductByUniqueID(uniqueID string) bool {
-	for i, product := range products {
+func (server *GrpcServer) deleteProductByUniqueID(uniqueID string) bool {
+	for i, product := range server.products {
 		if product.UniqueId != uniqueID {
 			continue
 		}
 
-		products = append(products[:i], products[i+1:]...)
+		server.products = append(server.products[:i], server.products[i+1:]...)
 		return true
 	}
 
