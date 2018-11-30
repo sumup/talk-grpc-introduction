@@ -49,7 +49,7 @@ extension ProductViewController {
 
         let request = GICDeleteProductRequest(uniqueId: product.uniqueId)
         grpcClient.deleteProduct(request) { (error: Error?) in
-            if error != nil {
+            if error == nil {
                 let index = self.products.firstIndex(where: { $0.uniqueId == product.uniqueId })!
                 self.products.remove(at: index)
 
