@@ -10,8 +10,7 @@ import Foundation
 
 extension ProductViewController {
     func initActionButtons() {
-        addRandomProductButton.addGestureRecognizer(
-            UITapGestureRecognizer(target: self, action: #selector(onAddRandomProductButtonTap)))
+        addRandomProductButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onAddRandomProductButtonTap)))
     }
 
     @objc private func onAddRandomProductButtonTap() {

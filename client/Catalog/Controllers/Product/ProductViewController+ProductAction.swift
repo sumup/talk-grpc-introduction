@@ -26,8 +26,7 @@ extension ProductViewController {
         }
     }
 
-    func addProduct(_ tableView: UITableView, _ product: GICProduct, _ image: UIImage? = nil,
-                    handler: ActionHandler = nil) {
+    func addProduct(_ tableView: UITableView, _ product: GICProduct, _ image: UIImage? = nil, handler: ActionHandler = nil) {
         activityIndicatorView.startAnimating()
 
         let request = GICCreateProductRequest(product: product, image: image)
@@ -64,15 +63,10 @@ extension ProductViewController {
         }
     }
 
-    func updateProduct(_ tableView: UITableView, _ product: GICProductWithUniqueId, _ image: UIImage? = nil,
-                       handler: ActionHandler = nil) {
+    func updateProduct(_ tableView: UITableView, _ product: GICProductWithUniqueId, _ image: UIImage? = nil, handler: ActionHandler = nil) {
         activityIndicatorView.startAnimating()
 
-        let request = GICUpdateProductRequest(
-            uniqueId: product.uniqueId,
-            product: RandomData.randomProduct(),
-            image: image)
-
+        let request = GICUpdateProductRequest(uniqueId: product.uniqueId, product: RandomData.randomProduct(), image: image)
         grpcClient.updateProduct(request) { (product: GICProductWithUniqueId?, error: Error?) in
             if let product = product {
                 let index = self.products.firstIndex(where: { $0.uniqueId == product.uniqueId })!

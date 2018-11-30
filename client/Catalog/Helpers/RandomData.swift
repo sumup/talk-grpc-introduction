@@ -13,11 +13,7 @@ class RandomData {
 
     static func randomProduct() -> GICProduct {
         sequence += 1
-
-        return GICProduct(
-            name: "Name \(sequence)",
-            description: "Description \(sequence)",
-            price: Double.init(sequence))
+        return GICProduct(name: "Name \(sequence)", description: "Description \(sequence)", price: Double.init(sequence))
     }
 
     static func randomImage() -> UIImage {

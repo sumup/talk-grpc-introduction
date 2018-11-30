@@ -26,18 +26,13 @@ extension ProductViewController: UITableViewDataSource, UITableViewDelegate {
         return products.count
     }
 
-    func tableView(_ tableView: UITableView,
-                   trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .destructive, title: "Delete") { (_, _, completionHandler) in
             self.deleteProduct(tableView, self.products[indexPath.item], handler: completionHandler)
         }
 
         let edit = UIContextualAction(style: .normal, title: "Edit") { (_, _, completionHandler) in
-            self.updateProduct(
-                tableView,
-                self.products[indexPath.item],
-                RandomData.randomImage(),
-                handler: completionHandler)
+            self.updateProduct(tableView, self.products[indexPath.item], RandomData.randomImage(), handler: completionHandler)
         }
 
         let swipeActionConfig = UISwipeActionsConfiguration(actions: [edit, delete])
