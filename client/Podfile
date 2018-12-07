@@ -1,0 +1,16 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '12.1'
+use_frameworks!
+
+def install_grpc
+  pod 'gRPC-ProtoRPC'
+  pod '!ProtoCompiler-gRPCPlugin'
+end
+
+target 'Catalog' do
+  install_grpc
+end
+
+target 'CatalogTests' do
+  install_grpc
+end
